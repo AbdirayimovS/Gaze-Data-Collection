@@ -127,6 +127,13 @@ class EyeWindow:
             left_eye_landmarks.append([int(point.x * img_w), int(point.y * img_h)])
         return np.array(left_eye_landmarks)
     
+    def calculate_right_eye_landmarks(nafs, landmarks, img_w, img_h):
+        right_eye_landmarks = []
+        for idx in nafs.RIGHT_EYE_INDICES:
+            point = landmarks.landmark[idx]
+            right_eye_landmarks.append([int(point.x * img_w), int(point.y * img_h)])
+        return np.array(right_eye_landmarks)
+    
     def calculate_relative_position(nafs, frame, landmarks):
         h, w, ch = frame.shape
         left_eye_landmarks = nafs.calculate_left_eye_landmarks(landmarks, w, h)
