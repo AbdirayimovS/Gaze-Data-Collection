@@ -11,6 +11,7 @@ from OpenCVWindow import FaceProcessor, EyeWindow, WebCamera
 from eye_dataset import dataset
 
 dataset = dataset.copy()
+
 class VideoThread(QThread):
     update_frame = pyqtSignal(tuple)
     def __init__(self, parent):
@@ -128,6 +129,7 @@ class FullscreenImageWindow(QMainWindow):
             self.thread.stop()
             self.thread.wait()
             self.thread = VideoThread(self)
+            self.thread.update_frame.connect(self.updateImage)
             print("thread is stopped and re-initialized!")
         super().mouseReleaseEvent(event)
 
