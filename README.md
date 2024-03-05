@@ -13,7 +13,11 @@ Eye tracking technologies are very expensive. My solution is to use Ml models an
 3. Run `python main.py`
 
 ## DEMO
-pass
+1. Press mouse to start storing the eye_landmarks data to the csv file. 
+2. Keep looking at cursor to store accurate gaze data. 
+3. Recommended to move head.
+Note: there is StatusBar in the bottom to show the coordinates of mouse (cursor) and the status overall.
+![demo](demo.gif)
 
 
 ## Useful links

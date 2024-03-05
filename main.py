@@ -17,9 +17,7 @@ class VideoThread(QThread):
     def __init__(self, parent):
         self.webcamera = WebCamera(camera_index=0)
         self.face_processor = FaceProcessor()
-        # self.zero_image = np.zeros((1080, 1920, 3), dtype=np.uint8)
         self.is_running = True
-
         super().__init__(parent)
 
 
@@ -81,7 +79,7 @@ class FullscreenImageWindow(QMainWindow):
         self.thread.update_frame.connect(self.updateImage)
     
     
-    def scaleFactor(self):
+    def set_scaleFactor(self):
         self.statusBar.showMessage(f"Data is being collected...Mouse clicked at: x={self.x}, y={self.y}")
         self.scaleFactor = min(self.label.width() / self.w, self.label.height() / self.h)
         print(self.scaleFactor, "Scale factor")
@@ -97,7 +95,7 @@ class FullscreenImageWindow(QMainWindow):
         self.w, self.h = self.frame.shape[:2][::-1]
 
         if not self.scaleFactor:
-            self.scaleFactor()
+            self.set_scaleFactor()
 
         self.left_pupil_center, self.right_pupil_center = self.eye_window.calculate_pupil_center(self.landmarks, *self.frame.shape[:2][::-1])  
         self.left_eye_landmarks = self.eye_window.calculate_left_eye_landmarks(self.landmarks, *self.frame.shape[:2][::-1])   
